@@ -1,0 +1,21 @@
+{{>header}}
+
+<img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{img}}">
+<div>titre: {{titre}} </div>
+<div>resume: {{resume}} </div>
+<div>rate : {{rate}} </div>
+
+
+<div>genre : {{#genre}} {{name}}   {{/genre}}</div>
+
+<div>release date : {{release}}</div>
+<div>time :{{time}}</div>
+
+{{#available}}
+<img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{logo_path}}" height="4%" width="4%">
+<div> {{provider_name}} </div>
+
+{{/available}}
+
+</body>
+</html>
