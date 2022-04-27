@@ -2,8 +2,13 @@
 
 /* Module de recherche dans une base de recettes de cuisine */
 const Sqlite = require('better-sqlite3');
+const cross_fetch = require("cross-fetch");
+const e = require("express");
 
 let db = new Sqlite('db.sqlite');
+
+let apiKey = "1e976b5a411fe60b504a811adb4817ee";
+
 
 /* Lire le contenu d'une recette à partir de son identifiant.
 
@@ -118,25 +123,24 @@ Cette fonction retourne un dictionnaire contenant les champs suivants :
 - page: numero de la page courante
 - num_pages: nombre total de pages
 */
-exports.search = (query, page) => {
-    query = query || "";
 
 
+async function search(query){
+    let resul = {result : [] ,nbrpage : null };
+    let url="https://api.themoviedb.org/3/search/movie?api_key="+apiKey+"&language=en-US&query="+query+"&page=1&include_adult=false"
+    return cross_fetch.fetch(url).then(function (response) {
+        return response.json()
+    }).then(function (text) {
+        resul.result=text['results'];
+        resul.nbrpage=text['page'];
+        return resul;
+    })
+
+}
+
+exports.search =search;
 
 
-
-    return {
-        results: results,
-        query: query,
-        next_page: page + 1,
-        page: page,
-        num_pages: parseInt(num_found / num_per_page) + 1,
-    };
-
-
-};
-
-async function fetchNexPage(query, page){
-    let promise = fetch()
+ function fetchNexPage(query){
 
 }
