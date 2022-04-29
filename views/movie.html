@@ -1,6 +1,6 @@
 {{>header}}
 
-<img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{img}}">
+<img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{img}}"  onerror="this.src ='/static/ImgNotFound.jpg'" height="20%" width="20%" >
 <div>titre: {{titre}} </div>
 <div>resume: {{resume}} </div>
 <div>rate : {{rate}} </div>
@@ -12,10 +12,19 @@
 <div>time :{{time}}</div>
 
 {{#available}}
-<img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{logo_path}}" height="4%" width="4%">
+<img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{logo_path}}" height="4%" width="4%" onerror="this.src ='/static/ImgNotFound.jpg'">
 <div> {{provider_name}} </div>
-
 {{/available}}
+
+{{#authenticated}}
+<form action="/movies/favorite/{{id}}{{img}}"  method="post">
+    <input type="submit" value="Favorite" style="background-color:{{colorFavorite}}">
+</form>
+{{/authenticated}}
+
+<form action="/back"  method="post">
+    <input type="submit" value="back">
+</form>
 
 </body>
 </html>

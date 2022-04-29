@@ -20,13 +20,6 @@ app.use(cookieSession({
     secret: 'projetMovie',
 }));
 
-function is_authenticated(req,res,next){
-    if (req.session.user !== undefined){
-        return next();
-    }
-    res.status(401).send('Authentication required');
-}
-
 app.use(function (req,res,next){
     if (req.session.user !==undefined){
         res.locals.authenticated = true;
@@ -35,11 +28,16 @@ app.use(function (req,res,next){
     return next();
 });
 
+function is_authenticated(req,res,next){
+    if (req.session.user !== undefined){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.get('/', (req, res) => {
     res.render('header');
 });
-
 
 app.post('/login' , (req,res) =>{
     let user =model.login(req.body.user,req.body.password);
@@ -78,9 +76,9 @@ app.get('/logout',(req,res)=>{
 
 app.get('/account',is_authenticated,(req,res)=>{
     let found = model.getDetailAccount(req.session.user);
+    console.log(found)
     res.render('account',found);
 });
-
 
 
 app.get('/:page/search',async (req, res) => {
@@ -90,8 +88,27 @@ app.get('/:page/search',async (req, res) => {
 
 app.get('/movie/:id',async (req, res) => {
     let found = await model.searchMovie(req.params.id);
-    console.log(found);
+    if (model.isFavorite(req.params.id,req.session.user) ===-1){
+        found['colorFavorite']="grey"
+    }else {found['colorFavorite']="red"}
     res.render('movie',found);
 });
+
+
+app.post('/movies/favorite/:id/:imgPath',async (req, res) => {
+    model.setFavorite(req.params.id , req.session.user , req.params.imgPath);
+    res.redirect('/movie/'+req.params.id);
+});
+
+//cas ou il y a pas de lien vers l'image
+app.post('/movies/favorite/:id',async (req, res) => {
+    model.setFavorite(req.params.id , req.session.user , "null");
+    res.redirect('/movie/'+req.params.id);
+});
+
+app.post('/back',async (req, res) => {
+    res.redirect('back');
+});
+
 
 app.listen(3000, () => console.log('listening on http://localhost:3000'));
