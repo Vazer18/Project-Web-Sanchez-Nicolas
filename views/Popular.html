@@ -1,0 +1,31 @@
+{{>header}}
+
+<style sr></style>
+
+<div >
+    <div class="pageBox">Page : {{actuPage}} / {{nbrPage}}</div>
+    <div class="contain">
+
+
+        <div class="searchBox" >
+
+            {{#result}}
+            <a href="/movie/{{id}}" >
+                <div class="MovieBox">
+                    <div class="box">
+                        <img class="ImgMovie" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{poster_path}}"  onerror="this.src ='/static/ImgNotFound.jpg';">
+                        <p class="Title">{{title}}</p>
+                    </div>
+                </div>
+            </a>
+            {{/result}}
+        </div>
+    </div>
+
+    <div class="buttonNextBack">
+        <a class="buttonBack" href="/{{pagePrec}}/Popular">Précédent</a>
+        <a class="buttonNext" href="/{{nextPage}}/Popular">Suivant</a>
+    </div>
+</div>
+</body>
+</html>

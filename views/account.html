@@ -1,18 +1,23 @@
 {{>header}}
+<link rel="stylesheet" href="http://localhost:3000/static/indexCSS.css">
+<h1 class="TitleIndex">Favoris</h1>
 
-username :{{name}}
-
-<div>Favorite: </div>
-
-<ul>
-    {{#favorite}}
-    <li>
-        <a type="button"  href="/movie/{{idMovie}}">
-            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{pathIMG}}" width="15%" height="15%" style="border-radius: 10%" onerror="this.src ='/static/ImgNotFound.jpg'">
+<div class="ScrollerPopular">
+    <div class="columnContent" >
+        {{#favorite}}
+        <a href="/movie/{{idMovie}}" >
+            <div class="MovieBox Popular">
+                <div class="box">
+                    <img class="ImgMovie" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{pathIMG}}"  onerror="this.src ='/static/ImgNotFound.jpg';">
+                </div>
+            </div>
         </a>
-    </li>
-    {{/favorite}}
-</ul>
+        {{/favorite}}
+    </div>
+</div>
+
+<a href="/selectProvider"><h1 class="TitleIndex">Selection des site de streaming</h1>
+</a>
 
 </body>
 </html>

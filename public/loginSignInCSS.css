@@ -1,0 +1,40 @@
+.BoxLogInSignIn{
+    width:400px;
+    margin:0 auto;
+    margin-top:10%;
+
+}
+
+.TitleLogin{
+    text-align: center;
+    margin: auto;
+    padding-bottom: 10px;
+
+}
+
+.BoxFormLogin{
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.inputLog{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.submitLog {
+    background-color: #646765;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}

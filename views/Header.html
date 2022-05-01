@@ -3,43 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://localhost:3000/static/SearchAndHeader.css">
+
+
 </head>
 <body>
-<header class="p-3 bg-dark text-white">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+<header>
+    <div class="contain">
+        <div class="BoxHeader">
+            <ul class="selectPageBox">
+                <li><a href="/" class="selectPage">Home</a></li>
+                <li><a href="http://localhost:3000/1/Popular" class="selectPage">Populaire</a></li>
             </ul>
-
-
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="/1/search">
-                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" name="query" >
+            <form class="searchForm" action="/1/search">
+                <input type="search" class="search" placeholder="Search..." aria-label="Search" name="query" >
+                <input class="checkBox" type="checkbox" name="Provider" >
+                <div>Avec/Sans vos sites de Streaming</div>
             </form>
-
-            <div class="text-end">
-
+            <div class="accountButtonBox">
                 {{^authenticated}}
-                <a type="button" class="btn btn-outline-light me-2" href="http://localhost:3000/login">Login</a>
-                <a type="button" class="btn btn-warning" href="http://localhost:3000/sign_up">Sign-up</a>
+                <a type="button" class="accountButton" href="/login">Connextion</a>
+                <a type="button" class="accountButtonOrange" href="/sign_up">Insciption</a>
                 {{/authenticated}}
 
                 {{#authenticated}}
-                <a type="button" class="btn btn-warning" href="http://localhost:3000/logout">logout</a>
-
-                
-                <a type="button"  href="http://localhost:3000/account">
-                    <img src="http://localhost:3000/static/SansPhoto.jpg" width="6.5%" height="6.5%" style="border-radius: 10%">
+                <a type="button" class="accountButtonOrange" href="/logout">Deconnexion</a>
+                <a type="button"  href="/account">
+                    <img src="/static/SansPhoto.jpg" class="imgAccount">
                 </a>
-
                 {{/authenticated}}
-
             </div>
         </div>
     </div>
 </header>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

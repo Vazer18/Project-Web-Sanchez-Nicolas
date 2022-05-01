@@ -1,0 +1,20 @@
+{{>header}}
+<link rel="stylesheet" href="http://localhost:3000/static/Provider.css">
+
+<div class="container">
+    <div class="ProviderList">
+        {{#result}}
+        <div class="boxProvider ">
+            <form class="butonProvider " action="/selectedProvider/{{provider_id}}" method="post">
+                <button  type="submit" style="border: 0; background: transparent">
+                    <img class="{{isProvider}}" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{logo_path}}" width="90" height="90" alt="submit"/>
+                    <div>{{provider_name}}</div>
+                </button>
+            </form>
+        </div>
+        {{/result}}
+    </div>
+</div>
+
+
+<a href="/account"  class="buttonNext">return</a>

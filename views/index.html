@@ -1,0 +1,29 @@
+{{>header}}
+<link rel="stylesheet" href="http://localhost:3000/static/indexCSS.css">
+
+<div>
+
+
+    <a  href="http://localhost:3000/1/Popular">
+        <h1 class="TitleIndex ">Plus Populaire</h1>
+    </a>
+
+    <div class="ScrollerPopular">
+        <div class="columnContent" >
+            {{#result}}
+            <a href="/movie/{{id}}" >
+                <div class="MovieBox Popular">
+                    <div class="box">
+                        <img class="ImgMovie" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{poster_path}}"  onerror="this.src ='/static/ImgNotFound.jpg';">
+                        <p class="Title">{{original_title}}</p>
+                    </div>
+                </div>
+            </a>
+            {{/result}}
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

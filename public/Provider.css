@@ -1,0 +1,27 @@
+.ProviderList{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.boxProvider{
+    margin: 15px;
+
+}
+
+.butonProvider{
+    display: flex;
+    flex-direction: column;
+}
+
+img{
+    border-radius: 15px;
+}
+
+img.selected {
+    border-color: #001cff; /* will overwrite color, only */
+}
+
+.ProviderSelected{
+    border:5px solid #86e14e;
+}

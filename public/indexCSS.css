@@ -1,0 +1,45 @@
+.ScrollerPopular{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    position: relative;
+    top: 0;
+    left: 0;
+
+}
+
+.columnContent{
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transition: height .5s linear;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.Popular{
+    margin-left: 40px;
+    width: 150px;
+    max-width: 200px;
+    box-shadow: none;
+    margin-top: 0;
+}
+
+.TitleIndex{
+    margin-left: 40px;
+    margin-top: 15px;
+    width: 12%;
+    border: 1px solid #343a40;
+    padding: 8px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.TitleIndex:hover{
+    background: #343a40 ;
+    color: white;
+}

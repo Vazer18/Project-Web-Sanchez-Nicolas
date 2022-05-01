@@ -1,12 +1,20 @@
 {{>header}}
 
-<h1>login</h1>
+<link rel="stylesheet" href="http://localhost:3000/static/loginSignInCSS.css">
 
-<form action="/login" method="post">
-    <input type="text" name="user" placeholder="username">
-    <input type="text" name="password" placeholder="password">
-    <input type="submit" value="login">
-</form>
+
+<div class="BoxLogInSignIn">
+
+
+    <div class="BoxFormLogin">
+        <h1 class="TitleLogin">Connexion</h1>
+        <form action="/login" method="post">
+            <input class="inputLog" type="text" name="user" placeholder="Nom d'utilisateur" minlength="1" required>
+            <input class="inputLog" type="text"  name="password" placeholder="Mot de Passe" minlength="1" required>
+            <input class="submitLog" type="submit" value="Connexion">
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

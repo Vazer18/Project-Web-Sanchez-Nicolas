@@ -17,7 +17,7 @@ app.use('/static', express.static('public'));
 const cookieSession = require('cookie-session');
 
 app.use(cookieSession({
-    secret: 'projetMovie',
+    secret: 'projetMovieProvider',
 }));
 
 app.use(function (req,res,next){
@@ -35,9 +35,14 @@ function is_authenticated(req,res,next){
     res.redirect("/login");
 }
 
-app.get('/', (req, res) => {
-    res.render('header');
+app.get('/', async (req, res) => {
+    let found = await model.search("",1,"Popular")
+    res.render('index' ,found);
 });
+
+/************************************************
+ ************ Route qui gere le compte ************
+ *************************************************/
 
 app.post('/login' , (req,res) =>{
     let user =model.login(req.body.user,req.body.password);
@@ -76,39 +81,82 @@ app.get('/logout',(req,res)=>{
 
 app.get('/account',is_authenticated,(req,res)=>{
     let found = model.getDetailAccount(req.session.user);
-    console.log(found)
     res.render('account',found);
 });
 
+app.get('/selectProvider', is_authenticated,async (req,res)=>{
+    let found = await model.searchProviderAvailable();
+
+    for (let i =0 ; i<found.result.length;i++){
+
+        if (model.isProvider(found.result[i]['provider_id'],req.session.user)!==-1 ){
+            found.result[i]['isProvider'] = 'ProviderSelected'
+        }else {
+            found.result[i]['isProvider'] = 'ProviderNotSelected'
+        }
+    }
+
+    res.render('ProviderChoise',found);
+});
+
+app.post('/selectedProvider/:id', is_authenticated,async (req,res)=>{
+    model.setProvider(req.params.id,req.session.user);
+    res.redirect('/selectProvider')
+});
+
+/************************************************************
+
+
+/************************************************************
+************ Route qui gere la recherche de film ************
+************************************************************/
 
 app.get('/:page/search',async (req, res) => {
-    let found = await model.search(req.query.query,req.params.page);
-    res.render('search',found);
+    if (req.query.Provider === "on"){
+        let found={
+            found : null
+        };
+        let arrayProvider = model.getProvider(req.session.user);
+        found.found=await model.searchMovieByProvider(req.query.query,arrayProvider);
+
+        res.render('searchByProvider',found);
+    }else {
+        let found = await model.search(req.query.query, req.params.page);
+        res.render('search', found);
+    }
+
+});
+
+app.get('/:page/Popular', async (req, res) => {
+    let found = await model.search("",req.params.page,"Popular");
+    res.render('Popular' ,found);
 });
 
 app.get('/movie/:id',async (req, res) => {
     let found = await model.searchMovie(req.params.id);
     if (model.isFavorite(req.params.id,req.session.user) ===-1){
-        found['colorFavorite']="grey"
-    }else {found['colorFavorite']="red"}
+        found['colorFavorite']="#ddff99"
+    }else {found['colorFavorite']="#ff704d"}
     res.render('movie',found);
 });
 
-
-app.post('/movies/favorite/:id/:imgPath',async (req, res) => {
+app.post('/movies/favorite/:id/:imgPath',is_authenticated,async (req, res) => {
     model.setFavorite(req.params.id , req.session.user , req.params.imgPath);
     res.redirect('/movie/'+req.params.id);
 });
 
 //cas ou il y a pas de lien vers l'image
-app.post('/movies/favorite/:id',async (req, res) => {
+app.post('/movies/favorite/:id',is_authenticated,async (req, res) => {
     model.setFavorite(req.params.id , req.session.user , "null");
     res.redirect('/movie/'+req.params.id);
 });
 
+/*************************** *********************************/
+
+
+
 app.post('/back',async (req, res) => {
     res.redirect('back');
 });
-
 
 app.listen(3000, () => console.log('listening on http://localhost:3000'));

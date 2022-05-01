@@ -8,5 +8,7 @@ let db = new Sqlite('db.sqlite');
 
 db.prepare('DROP TABLE IF EXISTS user').run();
 db.prepare('DROP TABLE IF EXISTS favorite').run();
+db.prepare('DROP TABLE IF EXISTS provider').run();
 db.prepare('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT)').run();
 db.prepare('CREATE TABLE favorite (idAccount INTEGER, idMovie INTEGER , pathIMG TEXT)').run();
+db.prepare('CREATE TABLE provider (idAccount INTEGER, idProvider INTEGER)').run();
